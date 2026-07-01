@@ -190,7 +190,11 @@ function categoryShortTitle(category) {
   const title = (category.title || `Tipo ${category.tip}`)
     .replace(/^test\s+/i, "")
     .replace(/\s+DGT$/i, " DGT");
-  return title.toLowerCase() === "oficiales dgt" ? "DGT" : title;
+  const normalized = title.toLowerCase();
+  if (normalized === "oficiales dgt") return "DGT";
+  if (normalized === "de examen") return "EXAMEN";
+  if (normalized === "por temas") return "TEMAS";
+  return title;
 }
 
 function testDisplayName(test) {
